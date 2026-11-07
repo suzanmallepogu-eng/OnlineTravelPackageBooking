@@ -1,74 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Bookings</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookings | SUZAN TRAVELS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav>
-    <h2>✈ Travel Explorer</h2>
-    <div>
-        <a href="index.html">Home</a>
-        <a href="customers.html">Customers</a>
-        <a href="destinations.html">Destinations</a>
-        <a href="packages.html">Packages</a>
-        <a href="bookings.html">Bookings</a>
-        <a href="admin.html">Admin</a>
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar">
+    <a class="brand" href="index.html">
+      <div class="brand-logo-mark">✈</div>
+      <div class="brand-text-block">
+        <span class="brand-name">SUZAN <span>TRAVELS</span></span>
+        <span class="brand-tagline-nav">Explore the World, Create Memories</span>
+      </div>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="packages.html">Packages</a>
+      <a href="customers.html">Customers</a>
+      <a href="bookings.html" class="active">Bookings</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="admin.html" class="nav-admin-btn"><span>⚙</span> Admin Dashboard</a>
     </div>
-</nav>
+  </nav>
 
-<section class="container">
-    <h1>Book Your Travel Package</h1>
+  <main class="section-wrap">
+    <div class="page-intro">
+      <span class="section-eyebrow">RESERVATIONS &amp; ITINERARIES</span>
+      <h1>Booking Management</h1>
+      <p>Reserve new travel packages, verify available seats, calculate trip pricing, and update reservation statuses.</p>
+    </div>
 
-    <form id="bookingForm">
+    <!-- BOOKING FORM PANEL -->
+    <div class="form-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">Reserve a Travel Package</h2>
+        <span class="form-hint">* Real-time slot allocation &amp; pricing</span>
+      </div>
 
-        <input type="number" name="customer_id"
-        placeholder="Customer ID" required>
+      <form id="bookingForm" class="form-grid">
+        <div class="form-group">
+          <label for="bookingCustomer">Select Registered Traveler *</label>
+          <select name="customer_id" id="bookingCustomer" required>
+            <option value="">-- Choose Registered Traveler --</option>
+          </select>
+          <span class="form-hint">Need to register a new traveler first? <a href="customers.html" style="color:var(--turquoise); font-weight:700;">Add Traveler →</a></span>
+        </div>
 
-        <input type="number" name="package_id"
-        placeholder="Package ID" required>
+        <div class="form-group">
+          <label for="bookingPackage">Select Travel Package *</label>
+          <select name="package_id" id="bookingPackage" required>
+            <option value="">-- Choose Travel Package --</option>
+          </select>
+        </div>
 
-        <label>Travel Date</label>
-        <input type="date" name="travel_data" required>
+        <div class="form-group">
+          <label for="bookingTravelDate">Travel Date *</label>
+          <input type="date" id="bookingTravelDate" name="travel_date" required>
+          <span class="form-hint">Departure date must be today or in the future.</span>
+        </div>
 
-        <input type="number" name="persons"
-        placeholder="Number of Persons" min="1" required>
+        <div class="form-group">
+          <label for="bookingPersons">Number of Travelers *</label>
+          <input type="number" id="bookingPersons" name="persons" min="1" max="100" value="1" required>
+        </div>
 
-        <button type="submit">Confirm Booking</button>
-    </form>
+        <!-- LIVE PRICE & AVAILABILITY CALCULATOR -->
+        <div id="bookingCalcCard" class="booking-calc-card" style="display: none;">
+          <div>
+            <div class="booking-calc-label">Live Trip Price Breakdown</div>
+            <div class="booking-calc-details" id="bookingCalcDetails">Calculating total...</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Estimated Total</div>
+            <div class="booking-calc-total" id="bookingCalcTotal">₹0</div>
+          </div>
+        </div>
 
-    <p id="bookingMessage" class="message"></p>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit" id="bookingSubmitBtn">Confirm Reservation ↗</button>
+          <button class="btn btn-outline-dark" type="reset" onclick="$('bookingCalcCard').style.display='none'">Reset Form</button>
+        </div>
+      </form>
+      <div id="bookingMessage" class="message-box"></div>
+    </div>
 
-    <h2>Check Booking Status</h2>
+    <!-- BOOKINGS DATA TABLE -->
+    <div class="table-panel">
+      <div class="table-filter-bar">
+        <div>
+          <h2 class="panel-title">Booking Records</h2>
+          <span class="section-desc" id="bookingCountBadge">Loading reservations...</span>
+        </div>
 
-    <input type="number" id="searchCustomer"
-    placeholder="Enter Customer ID">
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+          <input type="text" id="bookingSearchInput" class="table-search-input" placeholder="🔍 Search booking, customer or trip...">
+          
+          <select id="bookingStatusFilter" class="table-search-input" style="max-width: 180px;">
+            <option value="All">All Statuses</option>
+            <option value="Pending">⏳ Pending</option>
+            <option value="Confirmed">✓ Confirmed</option>
+            <option value="Cancelled">✕ Cancelled</option>
+          </select>
+        </div>
+      </div>
 
-    <button onclick="checkBooking()">Check Status</button>
-
-    <div id="bookingResult"></div>
-
-    <h2>All Bookings</h2>
-
-    <table>
-        <thead>
+      <div class="table-container">
+        <table>
+          <thead>
             <tr>
-                <th>Booking ID</th>
-                <th>Customer ID</th>
-                <th>Package ID</th>
-                <th>Travel Date</th>
-                <th>Persons</th>
-                <th>Total Amount</th>
-                <th>Status</th>
-                <th>Action</th>
+              <th>ID</th>
+              <th>Traveler</th>
+              <th>Package &amp; Destination</th>
+              <th>Travel Date</th>
+              <th>Travelers</th>
+              <th>Total Amount</th>
+              <th>Status</th>
+              <th>Action</th>
             </tr>
-        </thead>
-        <tbody id="bookingTable"></tbody>
-    </table>
-</section>
+          </thead>
+          <tbody id="bookingTableBody">
+            <tr>
+              <td colspan="8" style="padding: 24px; text-align: center; color: var(--text-muted);">
+                Loading booking records from MySQL database...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
 
-<script src="script.js"></script>
+  <!-- PROFESSIONAL FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-title">✈ SUZAN <span>TRAVELS</span></div>
+        <div class="footer-tagline">Explore the World, Create Memories.</div>
+        <p class="footer-desc">Your trusted companion for luxury holidays, international getaways and custom adventures across India and the globe.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="packages.html">Travel Packages</a></li>
+          <li><a href="bookings.html">Reserve Trip</a></li>
+          <li><a href="customers.html">Traveler Portal</a></li>
+          <li><a href="admin.html">Admin Dashboard</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Top Destinations</h4>
+        <ul class="footer-links">
+          <li><a href="packages.html?dest=Bali">Bali, Indonesia</a></li>
+          <li><a href="packages.html?dest=Switzerland">Swiss Alps</a></li>
+          <li><a href="packages.html?dest=Paris">Paris, France</a></li>
+          <li><a href="packages.html?dest=Goa">Goa Beaches</a></li>
+          <li><a href="packages.html?dest=Kerala">Kerala Backwaters</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-newsletter">
+        <h4>Travel Newsletter</h4>
+        <p>Subscribe for seasonal discounts, early bird specials and curated travel stories.</p>
+        <form class="footer-newsletter-form" onsubmit="event.preventDefault(); showToast('Subscribed to SUZAN TRAVELS Newsletter!', 'success'); this.reset();">
+          <input type="email" placeholder="Your email address" required>
+          <button class="btn btn-primary btn-sm" type="submit">Join</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 SUZAN TRAVELS. All rights reserved. Registered Tour Operator.</div>
+      <div>Designed with precision · Node.js · Express.js · MySQL</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

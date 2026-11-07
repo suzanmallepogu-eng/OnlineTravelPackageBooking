@@ -1,57 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Explorer - Home</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUZAN TRAVELS | Explore the World, Create Memories</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Manrope:wght@600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<nav>
-    <h2>✈ Travel Explorer</h2>
-    <div>
-        <a href="index.html">Home</a>
-        <a href="customers.html">Customers</a>
-        <a href="destinations.html">Destinations</a>
-        <a href="packages.html">Packages</a>
-        <a href="bookings.html">Bookings</a>
-        <a href="admin.html">Admin</a>
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar">
+    <a class="brand" href="index.html">
+      <div class="brand-logo-mark">✈</div>
+      <div class="brand-text-block">
+        <span class="brand-name">SUZAN <span>TRAVELS</span></span>
+        <span class="brand-tagline-nav">Explore the World, Create Memories</span>
+      </div>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html" class="active">Home</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="packages.html">Packages</a>
+      <a href="customers.html">Customers</a>
+      <a href="bookings.html">Bookings</a>
+      <a href="#contact">Contact</a>
+      <a href="admin.html" class="nav-admin-btn"><span>⚙</span> Admin Dashboard</a>
     </div>
-</nav>
+  </nav>
 
-<header class="hero">
-    <h1>Explore The World With Us</h1>
-    <p>Discover beautiful destinations and enjoy unforgettable journeys.</p>
-    <a class="btn" href="packages.html">Explore Packages</a>
-</header>
-
-<section class="container">
-    <h2>Welcome to Travel Explorer</h2>
-    <p>Find your perfect holiday destination, explore exciting travel packages and book your dream vacation.</p>
-
-    <div class="cards">
-        <div class="card">
-            <h3>🌍 Destinations</h3>
-            <p>Explore beautiful tourist destinations.</p>
-            <a href="destinations.html">Explore</a>
-        </div>
-
-        <div class="card">
-            <h3>🏖️ Packages</h3>
-            <p>Choose affordable travel packages.</p>
-            <a href="packages.html">View Packages</a>
-        </div>
-
-        <div class="card">
-            <h3>🎫 Bookings</h3>
-            <p>Book your favourite travel package.</p>
-            <a href="bookings.html">Book Now</a>
-        </div>
+  <!-- HERO SECTION -->
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">✦ PREMIER TRAVEL EXPERIENCES</div>
+      <h1>Discover Your Next <span>Adventure</span></h1>
+      <p class="hero-tagline">Explore the World, Create Memories. Luxury getaways, curated itineraries and effortless
+        bookings tailored just for you.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="packages.html">Explore Packages <span>↗</span></a>
+        <a class="btn btn-gold" href="bookings.html">Book Your Journey →</a>
+        <a class="btn btn-outline" href="destinations.html">Discover Places</a>
+      </div>
     </div>
-</section>
+  </header>
 
-<footer>© 2026 Travel Explorer | All Rights Reserved</footer>
+  <!-- SEARCH WIDGET -->
+  <section class="search-bar-section">
+    <div class="search-box-wrap">
+      <form class="search-box-form" id="homeSearchForm">
+        <div class="search-field">
+          <label for="homeSearchInput">Search Trip / Package</label>
+          <input type="text" id="homeSearchInput" placeholder="e.g. Island, Beach, Alps, Safari...">
+        </div>
+        <div class="search-field">
+          <label for="homeSearchDestination">Destination</label>
+          <select id="homeSearchDestination">
+            <option value="">All Destinations</option>
+          </select>
+        </div>
+        <div class="search-field">
+          <label for="tripType">Trip Category</label>
+          <select id="tripType">
+            <option value="">All Categories</option>
+            <option value="luxury">Luxury & Honeymoon</option>
+            <option value="adventure">Adventure & Trekking</option>
+            <option value="cultural">Heritage & Cultural</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit" style="height: 48px;">
+          <span>🔍</span> Find Trips
+        </button>
+      </form>
+    </div>
+  </section>
 
+  <!-- POPULAR DESTINATIONS SECTION -->
+  <main class="section-wrap">
+    <div class="section-header">
+      <div>
+        <span class="section-eyebrow">HANDPICKED GETAWAYS</span>
+        <h2 class="section-title">Popular Destinations</h2>
+        <p class="section-desc">From tropical sands to majestic snow-capped peaks, immerse yourself in the world's most
+          breathtaking escapes.</p>
+      </div>
+      <a class="text-link" href="destinations.html">View all destinations →</a>
+    </div>
+
+    <div id="homeDestinationsGrid" class="destinations-grid">
+      <!-- Loaded dynamically via script.js -->
+      <div style="grid-column: 1/-1; text-align: center; padding: 36px; color: var(--text-muted);">
+        Loading destinations from database...
+      </div>
+    </div>
+
+    <!-- WHY CHOOSE SUZAN TRAVELS -->
+    <section class="why-choose-wrap">
+      <div class="why-choose-header">
+        <span class="section-eyebrow" style="color: var(--gold-light);">THE SUZAN TRAVELS PROMISE</span>
+        <h2>Why Choose SUZAN TRAVELS</h2>
+        <p>We redefine holiday planning with personalized concierge service, certified safety standards and competitive
+          transparent pricing.</p>
+      </div>
+      <div class="why-choose-grid">
+        <div class="why-feature-card">
+          <div class="why-feature-icon">💎</div>
+          <h3 class="why-feature-title">Handpicked Luxury</h3>
+          <p class="why-feature-desc">Every resort, private villa, and guided tour is vetted rigorously for quality,
+            comfort and unforgettable local charm.</p>
+        </div>
+        <div class="why-feature-card">
+          <div class="why-feature-icon">🛡️</div>
+          <h3 class="why-feature-title">Best Price Guarantee</h3>
+          <p class="why-feature-desc">Transparent quotations with zero hidden surprises. You get unmatched value and
+            exclusive partner perks on every booking.</p>
+        </div>
+        <div class="why-feature-card">
+          <div class="why-feature-icon">📞</div>
+          <h3 class="why-feature-title">24/7 Personal Concierge</h3>
+          <p class="why-feature-desc">Our dedicated travel specialists assist you round the clock from initial
+            reservation until you safely return home.</p>
+        </div>
+        <div class="why-feature-card">
+          <div class="why-feature-icon">⚡</div>
+          <h3 class="why-feature-title">Instant Real-Time Booking</h3>
+          <p class="why-feature-desc">Live package availability, atomic seat allocations, flexible dates, and immediate
+            digital confirmation vouchers.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED TRAVEL PACKAGES -->
+    <div class="section-header" style="margin-top: 60px;">
+      <div>
+        <span class="section-eyebrow">EXCLUSIVE HOLIDAYS</span>
+        <h2 class="section-title">Featured Travel Packages</h2>
+        <p class="section-desc">Carefully crafted travel itineraries complete with verified luxury accommodations,
+          transfers and sightseeing.</p>
+      </div>
+      <a class="text-link" href="packages.html">Explore all packages →</a>
+    </div>
+
+    <div id="homePackagesGrid" class="packages-grid">
+      <!-- Loaded dynamically via script.js -->
+      <div style="grid-column: 1/-1; text-align: center; padding: 36px; color: var(--text-muted);">
+        Loading featured travel packages...
+      </div>
+    </div>
+
+    <!-- CUSTOMER TESTIMONIALS (SAMPLE DEMO CONTENT) -->
+    <section class="testimonials-section">
+      <div class="section-header">
+        <div>
+          <span class="section-eyebrow">TRAVELER STORIES</span>
+          <h2 class="section-title">What Our Travelers Say</h2>
+          <p class="section-desc">Read reviews from verified explorers who crafted memories with SUZAN TRAVELS.
+            <em>(Sample guest testimonials)</em></p>
+        </div>
+      </div>
+      <div class="testimonials-grid">
+        <article class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Our Swiss Alps scenic tour was perfection! Every hotel transfer and train ride
+            went like clockwork. SUZAN TRAVELS handled everything so we could just enjoy the views."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">RK</div>
+            <div class="testimonial-info">
+              <h4>Rohit &amp; Kavya Sharma</h4>
+              <p>Swiss Alpine Odyssey · Traveled Oct 2026</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"The Bali private villa escape booked through SUZAN TRAVELS was truly magical.
+            Best pricing and genuinely thoughtful travel recommendations. We will book again!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SM</div>
+            <div class="testimonial-info">
+              <h4>Sneha Mukherjee</h4>
+              <p>Bali Island Discovery · Traveled Sep 2026</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Booking our family holiday to Kerala was so easy. Instant confirmation, great
+            support when we needed to adjust dates, and wonderful memories!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">AP</div>
+            <div class="testimonial-info">
+              <h4>Amit Patel</h4>
+              <p>Kerala Houseboat Trails · Traveled Aug 2026</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact-section-wrap">
+      <div class="contact-info-card">
+        <div>
+          <span class="section-eyebrow" style="color: var(--gold-light);">GET IN TOUCH</span>
+          <h3>SUZAN TRAVELS</h3>
+          <p>Have questions about customized itineraries, group bookings, or corporate travel? Our specialists are ready
+            to help you plan your dream getaway.</p>
+
+          <div class="contact-details-list">
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div class="contact-item-text">
+                <strong>Headquarters</strong>
+                <span>SUZAN TRAVELS Tower, 5th Floor, Residency Road, Bangalore, India</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📞</div>
+              <div class="contact-item-text">
+                <strong>Phone &amp; WhatsApp</strong>
+                <span>+91 98765 43210 / +91 80 4123 4567</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">✉</div>
+              <div class="contact-item-text">
+                <strong>Email Concierge</strong>
+                <span>concierge@suzantravels.com</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">⏰</div>
+              <div class="contact-item-text">
+                <strong>Operating Hours</strong>
+                <span>Monday – Saturday: 9:00 AM – 8:00 PM IST</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.15);">
+          <small style="color: #94a3b8;">Registered Travel Agency &amp; Tour Operator · License #ST-2026-IND</small>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="font-size: 24px; margin-bottom: 6px; color: var(--navy);">Send an Inquiry</h3>
+        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 22px;">Fill in your travel preferences and
+          our travel advisors will contact you with a custom quote.</p>
+
+        <form id="contactForm" class="form-grid">
+          <div class="form-group">
+            <label for="contactName">Your Name *</label>
+            <input type="text" id="contactName" name="name" placeholder="e.g. Rahul Verma" required>
+          </div>
+          <div class="form-group">
+            <label for="contactEmail">Email Address *</label>
+            <input type="email" id="contactEmail" name="email" placeholder="rahul@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="contactPhone">Phone Number</label>
+            <input type="tel" id="contactPhone" name="phone" placeholder="+91 98765 00000">
+          </div>
+          <div class="form-group">
+            <label for="contactSubject">Destination of Interest</label>
+            <input type="text" id="contactSubject" name="subject" placeholder="e.g. Switzerland, Bali, Kerala...">
+          </div>
+          <div class="form-group full-width">
+            <label for="contactMessage">Tell Us About Your Dream Trip *</label>
+            <textarea id="contactMessage" name="message" rows="4"
+              placeholder="Dates, number of travelers, budget preference or special requests..." required></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit" id="contactSubmitBtn">Send Inquiry ↗</button>
+            <button class="btn btn-outline-dark" type="reset">Clear</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PROFESSIONAL FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-title">✈ SUZAN <span>TRAVELS</span></div>
+        <div class="footer-tagline">Explore the World, Create Memories.</div>
+        <p class="footer-desc">Your trusted companion for luxury holidays, international getaways and custom adventures
+          across India and the globe.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="packages.html">Travel Packages</a></li>
+          <li><a href="bookings.html">Reserve Trip</a></li>
+          <li><a href="customers.html">Traveler Portal</a></li>
+          <li><a href="admin.html">Admin Dashboard</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Top Destinations</h4>
+        <ul class="footer-links">
+          <li><a href="packages.html?dest=Maldives">Maldives Retreat</a></li>
+          <li><a href="packages.html?dest=Bali">Bali, Indonesia</a></li>
+          <li><a href="packages.html?dest=Switzerland">Swiss Alps</a></li>
+          <li><a href="packages.html?dest=Paris">Paris, France</a></li>
+          <li><a href="packages.html?dest=Goa">Goa Beaches</a></li>
+          <li><a href="packages.html?dest=Kerala">Kerala Backwaters</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-newsletter">
+        <h4>Travel Newsletter</h4>
+        <p>Subscribe for seasonal discounts, early bird specials and curated travel stories.</p>
+        <form class="footer-newsletter-form"
+          onsubmit="event.preventDefault(); showToast('Subscribed to SUZAN TRAVELS Newsletter!', 'success'); this.reset();">
+          <input type="email" placeholder="Your email address" required>
+          <button class="btn btn-primary btn-sm" type="submit">Join</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 SUZAN TRAVELS. All rights reserved. Registered Tour Operator.</div>
+      <div>Designed with precision · Node.js · Express.js · MySQL</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
+
 </html>

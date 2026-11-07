@@ -1,61 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Destinations</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destinations | SUZAN TRAVELS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Manrope:wght@600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<nav>
-    <h2>✈ Travel Explorer</h2>
-    <div>
-        <a href="index.html">Home</a>
-        <a href="customers.html">Customers</a>
-        <a href="destinations.html">Destinations</a>
-        <a href="packages.html">Packages</a>
-        <a href="bookings.html">Bookings</a>
-        <a href="admin.html">Admin</a>
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar">
+    <a class="brand" href="index.html">
+      <div class="brand-logo-mark">✈</div>
+      <div class="brand-text-block">
+        <span class="brand-name">SUZAN <span>TRAVELS</span></span>
+        <span class="brand-tagline-nav">Explore the World, Create Memories</span>
+      </div>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="destinations.html" class="active">Destinations</a>
+      <a href="packages.html">Packages</a>
+      <a href="customers.html">Customers</a>
+      <a href="bookings.html">Bookings</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="admin.html" class="nav-admin-btn"><span>⚙</span> Admin Dashboard</a>
     </div>
-</nav>
+  </nav>
 
-<section class="container">
-    <h1>Manage Destinations</h1>
+  <main class="section-wrap">
+    <div class="page-intro">
+      <span class="section-eyebrow">WORLDWIDE DESTINATIONS</span>
+      <h1>Destinations Management</h1>
+      <p>Discover dream getaways or create and maintain tourist destinations across the SUZAN TRAVELS network.</p>
+    </div>
 
-    <form id="destinationForm">
-        <input type="hidden" name="destination_id">
+    <!-- FORM PANEL (CREATE / EDIT) -->
+    <div class="form-panel">
+      <div class="panel-header">
+        <h2 class="panel-title" id="destinationFormTitle">Add a New Destination</h2>
+        <span class="form-hint">* Required fields</span>
+      </div>
 
-        <input type="text" name="destination_name"
-        placeholder="Destination Name" required>
+      <form id="destinationForm" class="form-grid">
+        <input type="hidden" name="destination_id" id="destinationId">
 
-        <input type="text" name="location"
-        placeholder="Location" required>
+        <div class="form-group">
+          <label for="destName">Destination Name *</label>
+          <input type="text" id="destName" name="destination_name" placeholder="e.g. Maldives Island Retreat" required>
+        </div>
 
-        <textarea name="description"
-        placeholder="Destination Description" required></textarea>
+        <div class="form-group">
+          <label for="destLocation">Location (City, Country) *</label>
+          <input type="text" id="destLocation" name="location" placeholder="e.g. Male, Maldives" required>
+        </div>
 
-        <button type="submit">Add Destination</button>
-        <button type="button" onclick="resetForm('destinationForm')">Clear</button>
-    </form>
+        <div class="form-group full-width">
+          <label for="destImage">Destination Image (Local path or Image URL)</label>
+          <input type="text" id="destImage" name="image_url"
+            placeholder="e.g. /images/maldives.jpg or https://images.unsplash.com/...">
+          <span class="form-hint">Tip: Use downloaded images like <code>/images/maldives.jpg</code>,
+            <code>/images/paris.jpg</code>, <code>/images/switzerland.jpg</code>, <code>/images/bali.jpg</code>,
+            <code>/images/dubai.jpg</code>, <code>/images/goa.jpg</code>, <code>/images/kerala.jpg</code>,
+            <code>/images/manali.jpg</code>, <code>/images/tajmahal.jpg</code>, <code>/images/thailand.jpg</code></span>
+        </div>
 
-    <p id="destinationMessage" class="message"></p>
+        <div class="form-group full-width">
+          <label for="destDesc">Destination Description *</label>
+          <textarea id="destDesc" name="description" rows="3"
+            placeholder="Describe highlights, atmosphere, cultural sights and top activities..." required></textarea>
+        </div>
 
-    <h2>Available Destinations</h2>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit" id="destinationSubmitBtn">Save Destination</button>
+          <button class="btn btn-outline-dark" type="button" onclick="resetDestinationForm()">Clear / Reset</button>
+        </div>
+      </form>
+      <div id="destinationMessage" class="message-box"></div>
+    </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Destination</th>
-                <th>Location</th>
-                <th>Description</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="destinationTable"></tbody>
-    </table>
-</section>
+    <!-- SEARCH & DISPLAY SECTION -->
+    <div class="table-panel">
+      <div class="panel-header" style="flex-wrap: wrap;">
+        <div>
+          <h2 class="panel-title">Explore &amp; Manage Destinations</h2>
+          <span class="section-desc" id="destinationCountBadge">Loading destinations...</span>
+        </div>
+        <div class="table-search-box">
+          <input type="text" id="destinationSearchInput" class="table-search-input"
+            placeholder="🔍 Search by name or location...">
+        </div>
+      </div>
 
-<script src="script.js"></script>
+      <div id="destinationsGrid" class="destinations-grid" style="margin-top: 18px;">
+        <p style="padding: 24px; color: var(--text-muted);">Loading destination records from MySQL...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- PROFESSIONAL FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-title">✈ SUZAN <span>TRAVELS</span></div>
+        <div class="footer-tagline">Explore the World, Create Memories.</div>
+        <p class="footer-desc">Your trusted companion for luxury holidays, international getaways and custom adventures
+          across India and the globe.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="packages.html">Travel Packages</a></li>
+          <li><a href="bookings.html">Reserve Trip</a></li>
+          <li><a href="customers.html">Traveler Portal</a></li>
+          <li><a href="admin.html">Admin Dashboard</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Top Destinations</h4>
+        <ul class="footer-links">
+          <li><a href="packages.html?dest=Maldives">Maldives Retreat</a></li>
+          <li><a href="packages.html?dest=Bali">Bali, Indonesia</a></li>
+          <li><a href="packages.html?dest=Switzerland">Swiss Alps</a></li>
+          <li><a href="packages.html?dest=Paris">Paris, France</a></li>
+          <li><a href="packages.html?dest=Goa">Goa Beaches</a></li>
+          <li><a href="packages.html?dest=Kerala">Kerala Backwaters</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-newsletter">
+        <h4>Travel Newsletter</h4>
+        <p>Subscribe for seasonal discounts, early bird specials and curated travel stories.</p>
+        <form class="footer-newsletter-form"
+          onsubmit="event.preventDefault(); showToast('Subscribed to SUZAN TRAVELS Newsletter!', 'success'); this.reset();">
+          <input type="email" placeholder="Your email address" required>
+          <button class="btn btn-primary btn-sm" type="submit">Join</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 SUZAN TRAVELS. All rights reserved. Registered Tour Operator.</div>
+      <div>Designed with precision · Node.js · Express.js · MySQL</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
+
 </html>

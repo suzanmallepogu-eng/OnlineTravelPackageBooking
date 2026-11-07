@@ -1,69 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Travel Packages</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Packages | SUZAN TRAVELS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Manrope:wght@600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<nav>
-    <h2>✈ Travel Explorer</h2>
-    <div>
-        <a href="index.html">Home</a>
-        <a href="customers.html">Customers</a>
-        <a href="destinations.html">Destinations</a>
-        <a href="packages.html">Packages</a>
-        <a href="bookings.html">Bookings</a>
-        <a href="admin.html">Admin</a>
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar">
+    <a class="brand" href="index.html">
+      <div class="brand-logo-mark">✈</div>
+      <div class="brand-text-block">
+        <span class="brand-name">SUZAN <span>TRAVELS</span></span>
+        <span class="brand-tagline-nav">Explore the World, Create Memories</span>
+      </div>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="packages.html" class="active">Packages</a>
+      <a href="customers.html">Customers</a>
+      <a href="bookings.html">Bookings</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="admin.html" class="nav-admin-btn"><span>⚙</span> Admin Dashboard</a>
     </div>
-</nav>
+  </nav>
 
-<section class="container">
-    <h1>Manage Travel Packages</h1>
+  <main class="section-wrap">
+    <div class="page-intro">
+      <span class="section-eyebrow">CURATED ITINERARIES</span>
+      <h1>Travel Packages Management</h1>
+      <p>Browse handpicked holiday packages or create, update, and manage itineraries and seat allocations.</p>
+    </div>
 
-    <form id="packageForm">
-        <input type="hidden" name="package_id">
+    <!-- FORM PANEL (CREATE / EDIT) -->
+    <div class="form-panel">
+      <div class="panel-header">
+        <h2 class="panel-title" id="packageFormTitle">Add a New Travel Package</h2>
+        <span class="form-hint">* Required fields</span>
+      </div>
 
-        <input type="number" name="destination_id"
-        placeholder="Destination ID" required>
+      <form id="packageForm" class="form-grid">
+        <input type="hidden" name="package_id" id="packageId">
 
-        <input type="text" name="package_name"
-        placeholder="Package Name" required>
+        <div class="form-group">
+          <label for="packageDestination">Destination *</label>
+          <select name="destination_id" id="packageDestination" required>
+            <option value="">-- Choose Destination --</option>
+          </select>
+        </div>
 
-        <input type="number" name="duration"
-        placeholder="Duration in Days" min="1" required>
+        <div class="form-group">
+          <label for="packageName">Package Name *</label>
+          <input type="text" id="packageName" name="package_name" placeholder="e.g. Swiss Alps Scenic Odyssey" required>
+        </div>
 
-        <input type="number" name="price"
-        placeholder="Price" min="0" required>
+        <div class="form-group">
+          <label for="packageDuration">Duration (Days) *</label>
+          <input type="number" id="packageDuration" name="duration" min="1" max="60" placeholder="e.g. 7" required>
+        </div>
 
-        <input type="number" name="available_slots"
-        placeholder="Available Slots" min="0" required>
+        <div class="form-group">
+          <label for="packagePrice">Price Per Person (₹) *</label>
+          <input type="number" id="packagePrice" name="price" min="0" step="0.01" placeholder="e.g. 45000" required>
+        </div>
 
-        <button type="submit">Add Package</button>
-        <button type="button" onclick="resetForm('packageForm')">Clear</button>
-    </form>
+        <div class="form-group">
+          <label for="packageSlots">Available Slots (Seats) *</label>
+          <input type="number" id="packageSlots" name="available_slots" min="0" max="500" placeholder="e.g. 20"
+            required>
+        </div>
 
-    <p id="packageMessage" class="message"></p>
+        <div class="form-group">
+          <label for="packageImage">Package Image (Local path or URL)</label>
+          <input type="text" id="packageImage" name="image_url" placeholder="e.g. /images/switzerland.jpg (optional)">
+          <span class="form-hint">Leave blank to use the destination's default photo.</span>
+        </div>
 
-    <h2>Available Packages</h2>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit" id="packageSubmitBtn">Save Package</button>
+          <button class="btn btn-outline-dark" type="button" onclick="resetPackageForm()">Clear / Reset</button>
+        </div>
+      </form>
+      <div id="packageMessage" class="message-box"></div>
+    </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Destination</th>
-                <th>Package</th>
-                <th>Duration</th>
-                <th>Price</th>
-                <th>Slots</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="packageTable"></tbody>
-    </table>
-</section>
+    <!-- FILTER & SEARCH BAR -->
+    <div class="table-panel">
+      <div class="table-filter-bar">
+        <div>
+          <h2 class="panel-title">Explore Travel Packages</h2>
+          <span class="section-desc" id="packageCountBadge">Loading packages...</span>
+        </div>
 
-<script src="script.js"></script>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+          <input type="text" id="packageSearchInput" class="table-search-input" placeholder="🔍 Search package name...">
+
+          <select id="filterPackageDestination" class="table-search-input" style="max-width: 220px;">
+            <option value="">All Destinations</option>
+          </select>
+
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted);">
+            <label for="filterPackageMaxPrice">Max ₹:</label>
+            <input type="range" id="filterPackageMaxPrice" min="5000" max="150000" step="5000" value="150000"
+              style="width: 110px; cursor: pointer;">
+            <span id="priceDisplay" style="font-weight: 700; color: var(--navy); min-width: 65px;">₹1,50,000</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="packagesGrid" class="packages-grid" style="margin-top: 18px;">
+        <p style="padding: 24px; color: var(--text-muted);">Loading packages from MySQL database...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- PROFESSIONAL FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-title">✈ SUZAN <span>TRAVELS</span></div>
+        <div class="footer-tagline">Explore the World, Create Memories.</div>
+        <p class="footer-desc">Your trusted companion for luxury holidays, international getaways and custom adventures
+          across India and the globe.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="packages.html">Travel Packages</a></li>
+          <li><a href="bookings.html">Reserve Trip</a></li>
+          <li><a href="customers.html">Traveler Portal</a></li>
+          <li><a href="admin.html">Admin Dashboard</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Top Destinations</h4>
+        <ul class="footer-links">
+          <li><a href="packages.html?dest=Bali">Bali, Indonesia</a></li>
+          <li><a href="packages.html?dest=Switzerland">Swiss Alps</a></li>
+          <li><a href="packages.html?dest=Paris">Paris, France</a></li>
+          <li><a href="packages.html?dest=Goa">Goa Beaches</a></li>
+          <li><a href="packages.html?dest=Kerala">Kerala Backwaters</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-newsletter">
+        <h4>Travel Newsletter</h4>
+        <p>Subscribe for seasonal discounts, early bird specials and curated travel stories.</p>
+        <form class="footer-newsletter-form"
+          onsubmit="event.preventDefault(); showToast('Subscribed to SUZAN TRAVELS Newsletter!', 'success'); this.reset();">
+          <input type="email" placeholder="Your email address" required>
+          <button class="btn btn-primary btn-sm" type="submit">Join</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 SUZAN TRAVELS. All rights reserved. Registered Tour Operator.</div>
+      <div>Designed with precision · Node.js · Express.js · MySQL</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
+
 </html>

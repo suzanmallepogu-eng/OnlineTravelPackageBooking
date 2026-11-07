@@ -1,61 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | SUZAN TRAVELS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Manrope:wght@600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<nav>
-    <h2>✈ Travel Explorer</h2>
-    <div>
-        <a href="index.html">Home</a>
-        <a href="customers.html">Customers</a>
-        <a href="destinations.html">Destinations</a>
-        <a href="packages.html">Packages</a>
-        <a href="bookings.html">Bookings</a>
-        <a href="admin.html">Admin</a>
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar">
+    <a class="brand" href="index.html">
+      <div class="brand-logo-mark">✈</div>
+      <div class="brand-text-block">
+        <span class="brand-name">SUZAN <span>TRAVELS</span></span>
+        <span class="brand-tagline-nav">Explore the World, Create Memories</span>
+      </div>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="packages.html">Packages</a>
+      <a href="customers.html">Customers</a>
+      <a href="bookings.html">Bookings</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="admin.html" class="nav-admin-btn active"><span>⚙</span> Admin Dashboard</a>
     </div>
-</nav>
+  </nav>
 
-<section class="container">
-    <h1>Admin Dashboard</h1>
-
-    <div class="cards">
-        <div class="card">
-            <h2 id="totalCustomers">0</h2>
-            <p>Total Customers</p>
-        </div>
-
-        <div class="card">
-            <h2 id="totalDestinations">0</h2>
-            <p>Total Destinations</p>
-        </div>
-
-        <div class="card">
-            <h2 id="totalPackages">0</h2>
-            <p>Total Packages</p>
-        </div>
-
-        <div class="card">
-            <h2 id="totalBookings">0</h2>
-            <p>Total Bookings</p>
-        </div>
+  <main class="section-wrap">
+    <div class="page-intro">
+      <span class="section-eyebrow">CONTROL CENTER</span>
+      <h1>Admin Management Dashboard</h1>
+      <p>Real-time analytics and management overview connected to your live MySQL database.</p>
     </div>
 
-    <h2>Manage Booking Status</h2>
+    <!-- METRICS GRID (CALCULATED FROM MYSQL) -->
+    <section class="stats-cards-grid">
+      <div class="stat-metric-card">
+        <div class="stat-metric-icon stat-icon-navy">👥</div>
+        <div class="stat-metric-details">
+          <span class="stat-metric-title">Travelers</span>
+          <div class="stat-metric-value" id="totalCustomers">—</div>
+          <span class="stat-metric-sub">Registered Customers</span>
+        </div>
+      </div>
 
-    <p>Go to the Bookings page to view bookings and update their status.</p>
-    <a class="btn" href="bookings.html">Manage Bookings</a>
+      <div class="stat-metric-card">
+        <div class="stat-metric-icon stat-icon-turquoise">🗺️</div>
+        <div class="stat-metric-details">
+          <span class="stat-metric-title">Destinations</span>
+          <div class="stat-metric-value" id="totalDestinations">—</div>
+          <span class="stat-metric-sub">Active Holiday Locales</span>
+        </div>
+      </div>
 
-    <h2>Manage Destinations</h2>
-    <a class="btn" href="destinations.html">Manage Destinations</a>
+      <div class="stat-metric-card">
+        <div class="stat-metric-icon stat-icon-sky">🎒</div>
+        <div class="stat-metric-details">
+          <span class="stat-metric-title">Packages</span>
+          <div class="stat-metric-value" id="totalPackages">—</div>
+          <span class="stat-metric-sub">Curated Itineraries</span>
+        </div>
+      </div>
 
-    <h2>Manage Packages</h2>
-    <a class="btn" href="packages.html">Manage Packages</a>
-</section>
+      <div class="stat-metric-card">
+        <div class="stat-metric-icon stat-icon-gold">📋</div>
+        <div class="stat-metric-details">
+          <span class="stat-metric-title">Total Bookings</span>
+          <div class="stat-metric-value" id="totalBookings">—</div>
+          <span class="stat-metric-sub">All-time Reservations</span>
+        </div>
+      </div>
 
-<script src="script.js"></script>
+      <div class="stat-metric-card">
+        <div class="stat-metric-icon stat-icon-gold">⏳</div>
+        <div class="stat-metric-details">
+          <span class="stat-metric-title">Pending</span>
+          <div class="stat-metric-value" id="pendingBookings" style="color:#b45309;">—</div>
+          <span class="stat-metric-sub">Awaiting Confirmation</span>
+        </div>
+      </div>
+
+      <div class="stat-metric-card">
+        <div class="stat-metric-icon stat-icon-green">✓</div>
+        <div class="stat-metric-details">
+          <span class="stat-metric-title">Confirmed</span>
+          <div class="stat-metric-value" id="confirmedBookings" style="color:#047857;">—</div>
+          <span class="stat-metric-sub">Confirmed Reservations</span>
+        </div>
+      </div>
+
+      <div class="stat-metric-card">
+        <div class="stat-metric-icon stat-icon-red">✕</div>
+        <div class="stat-metric-details">
+          <span class="stat-metric-title">Cancelled</span>
+          <div class="stat-metric-value" id="cancelledBookings" style="color:#b91c1c;">—</div>
+          <span class="stat-metric-sub">Released / Cancelled</span>
+        </div>
+      </div>
+
+      <div class="stat-metric-card">
+        <div class="stat-metric-icon stat-icon-turquoise">💰</div>
+        <div class="stat-metric-details">
+          <span class="stat-metric-title">Confirmed Revenue</span>
+          <div class="stat-metric-value" id="totalRevenue" style="font-size:24px; color:var(--turquoise);">—</div>
+          <span class="stat-metric-sub">Gross Confirmed Bookings</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK MANAGEMENT SHORTCUTS -->
+    <div class="dashboard-shortcuts-grid">
+      <a href="destinations.html" class="dashboard-shortcut-btn">
+        <span>🗺️ Manage Destinations</span>
+        <b>→</b>
+      </a>
+      <a href="packages.html" class="dashboard-shortcut-btn">
+        <span>🎒 Manage Packages</span>
+        <b>→</b>
+      </a>
+      <a href="customers.html" class="dashboard-shortcut-btn">
+        <span>👥 Manage Travelers</span>
+        <b>→</b>
+      </a>
+      <a href="bookings.html" class="dashboard-shortcut-btn">
+        <span>📅 Manage All Bookings</span>
+        <b>→</b>
+      </a>
+    </div>
+
+    <!-- RECENT BOOKINGS MONITOR -->
+    <div class="table-panel">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title">Recent Customer Bookings</h2>
+          <span class="section-desc">Manage statuses directly or view complete reservations.</span>
+        </div>
+        <a class="text-link" href="bookings.html">Open Full Bookings Manager →</a>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Traveler</th>
+              <th>Package &amp; Destination</th>
+              <th>Travel Date</th>
+              <th>Travelers</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="adminRecentBookings">
+            <tr>
+              <td colspan="8" style="padding: 24px; text-align: center; color: var(--text-muted);">
+                Loading live statistics and recent reservations from MySQL...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- PROFESSIONAL FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-title">✈ SUZAN <span>TRAVELS</span></div>
+        <div class="footer-tagline">Explore the World, Create Memories.</div>
+        <p class="footer-desc">Your trusted companion for luxury holidays, international getaways and custom adventures
+          across India and the globe.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="packages.html">Travel Packages</a></li>
+          <li><a href="bookings.html">Reserve Trip</a></li>
+          <li><a href="customers.html">Traveler Portal</a></li>
+          <li><a href="admin.html">Admin Dashboard</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Top Destinations</h4>
+        <ul class="footer-links">
+          <li><a href="packages.html?dest=Bali">Bali, Indonesia</a></li>
+          <li><a href="packages.html?dest=Switzerland">Swiss Alps</a></li>
+          <li><a href="packages.html?dest=Paris">Paris, France</a></li>
+          <li><a href="packages.html?dest=Goa">Goa Beaches</a></li>
+          <li><a href="packages.html?dest=Kerala">Kerala Backwaters</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-newsletter">
+        <h4>Travel Newsletter</h4>
+        <p>Subscribe for seasonal discounts, early bird specials and curated travel stories.</p>
+        <form class="footer-newsletter-form"
+          onsubmit="event.preventDefault(); showToast('Subscribed to SUZAN TRAVELS Newsletter!', 'success'); this.reset();">
+          <input type="email" placeholder="Your email address" required>
+          <button class="btn btn-primary btn-sm" type="submit">Join</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 SUZAN TRAVELS. All rights reserved. Registered Tour Operator.</div>
+      <div>Designed with precision · Node.js · Express.js · MySQL</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
+
 </html>
