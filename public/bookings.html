@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bookings</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <h2>✈ Travel Explorer</h2>
+    <div>
+        <a href="index.html">Home</a>
+        <a href="customers.html">Customers</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="bookings.html">Bookings</a>
+        <a href="admin.html">Admin</a>
+    </div>
+</nav>
+
+<section class="container">
+    <h1>Book Your Travel Package</h1>
+
+    <form id="bookingForm">
+
+        <input type="number" name="customer_id"
+        placeholder="Customer ID" required>
+
+        <input type="number" name="package_id"
+        placeholder="Package ID" required>
+
+        <label>Travel Date</label>
+        <input type="date" name="travel_data" required>
+
+        <input type="number" name="persons"
+        placeholder="Number of Persons" min="1" required>
+
+        <button type="submit">Confirm Booking</button>
+    </form>
+
+    <p id="bookingMessage" class="message"></p>
+
+    <h2>Check Booking Status</h2>
+
+    <input type="number" id="searchCustomer"
+    placeholder="Enter Customer ID">
+
+    <button onclick="checkBooking()">Check Status</button>
+
+    <div id="bookingResult"></div>
+
+    <h2>All Bookings</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Booking ID</th>
+                <th>Customer ID</th>
+                <th>Package ID</th>
+                <th>Travel Date</th>
+                <th>Persons</th>
+                <th>Total Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="bookingTable"></tbody>
+    </table>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>

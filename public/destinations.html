@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Destinations</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <h2>✈ Travel Explorer</h2>
+    <div>
+        <a href="index.html">Home</a>
+        <a href="customers.html">Customers</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="bookings.html">Bookings</a>
+        <a href="admin.html">Admin</a>
+    </div>
+</nav>
+
+<section class="container">
+    <h1>Manage Destinations</h1>
+
+    <form id="destinationForm">
+        <input type="hidden" name="destination_id">
+
+        <input type="text" name="destination_name"
+        placeholder="Destination Name" required>
+
+        <input type="text" name="location"
+        placeholder="Location" required>
+
+        <textarea name="description"
+        placeholder="Destination Description" required></textarea>
+
+        <button type="submit">Add Destination</button>
+        <button type="button" onclick="resetForm('destinationForm')">Clear</button>
+    </form>
+
+    <p id="destinationMessage" class="message"></p>
+
+    <h2>Available Destinations</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Destination</th>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="destinationTable"></tbody>
+    </table>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>

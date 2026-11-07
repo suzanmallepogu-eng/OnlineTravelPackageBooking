@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Packages</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <h2>✈ Travel Explorer</h2>
+    <div>
+        <a href="index.html">Home</a>
+        <a href="customers.html">Customers</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="bookings.html">Bookings</a>
+        <a href="admin.html">Admin</a>
+    </div>
+</nav>
+
+<section class="container">
+    <h1>Manage Travel Packages</h1>
+
+    <form id="packageForm">
+        <input type="hidden" name="package_id">
+
+        <input type="number" name="destination_id"
+        placeholder="Destination ID" required>
+
+        <input type="text" name="package_name"
+        placeholder="Package Name" required>
+
+        <input type="number" name="duration"
+        placeholder="Duration in Days" min="1" required>
+
+        <input type="number" name="price"
+        placeholder="Price" min="0" required>
+
+        <input type="number" name="available_slots"
+        placeholder="Available Slots" min="0" required>
+
+        <button type="submit">Add Package</button>
+        <button type="button" onclick="resetForm('packageForm')">Clear</button>
+    </form>
+
+    <p id="packageMessage" class="message"></p>
+
+    <h2>Available Packages</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Destination</th>
+                <th>Package</th>
+                <th>Duration</th>
+                <th>Price</th>
+                <th>Slots</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="packageTable"></tbody>
+    </table>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>

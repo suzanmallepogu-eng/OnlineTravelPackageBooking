@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <h2>✈ Travel Explorer</h2>
+    <div>
+        <a href="index.html">Home</a>
+        <a href="customers.html">Customers</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="bookings.html">Bookings</a>
+        <a href="admin.html">Admin</a>
+    </div>
+</nav>
+
+<section class="container">
+    <h1>Customer Registration</h1>
+
+    <form id="customerForm">
+        <input type="hidden" name="customer_id">
+
+        <input type="text" name="name" placeholder="Customer Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+        <input type="password" name="password" placeholder="Password" required>
+
+        <button type="submit">Register Customer</button>
+        <button type="button" onclick="resetForm('customerForm')">Clear</button>
+    </form>
+
+    <p id="customerMessage" class="message"></p>
+
+    <h2>Customer Details</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="customerTable"></tbody>
+    </table>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>

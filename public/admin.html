@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <h2>✈ Travel Explorer</h2>
+    <div>
+        <a href="index.html">Home</a>
+        <a href="customers.html">Customers</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="bookings.html">Bookings</a>
+        <a href="admin.html">Admin</a>
+    </div>
+</nav>
+
+<section class="container">
+    <h1>Admin Dashboard</h1>
+
+    <div class="cards">
+        <div class="card">
+            <h2 id="totalCustomers">0</h2>
+            <p>Total Customers</p>
+        </div>
+
+        <div class="card">
+            <h2 id="totalDestinations">0</h2>
+            <p>Total Destinations</p>
+        </div>
+
+        <div class="card">
+            <h2 id="totalPackages">0</h2>
+            <p>Total Packages</p>
+        </div>
+
+        <div class="card">
+            <h2 id="totalBookings">0</h2>
+            <p>Total Bookings</p>
+        </div>
+    </div>
+
+    <h2>Manage Booking Status</h2>
+
+    <p>Go to the Bookings page to view bookings and update their status.</p>
+    <a class="btn" href="bookings.html">Manage Bookings</a>
+
+    <h2>Manage Destinations</h2>
+    <a class="btn" href="destinations.html">Manage Destinations</a>
+
+    <h2>Manage Packages</h2>
+    <a class="btn" href="packages.html">Manage Packages</a>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
